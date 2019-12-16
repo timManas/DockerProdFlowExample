@@ -6,19 +6,19 @@ before_install:
     - docker build -t timmanas/dockerprodflowexample -f Dockerfile.dev .
 
 script:
-    - docker run timmanas/dockerprodflowexample npm run test -- --coverage
+    - docker run -e CI=true timmanas/dockerprodflowexample npm run test
 
-# deploy:
-#   provider: elasticbeanstalk
-#   region: "us-east-2"
-#   app: "dockerprodflowexample"
-#   env: "Dockerprodflowexample-env"
-#   bucket_name: "elasticbeanstalk-us-east-2-578771921771"
-#   bucket_path: "dockerprodflowexample"
-#   on:
-#     branch: master
-#   access_key_id: $access_key_id
-#   secret_access_key:
-#     secure: "$secret_access_key"    
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "DockerProdFlow"
+  env: "Dockerprodflow-env"
+  bucket_name: "elasticbeanstalk-us-east-2-578771921771"
+  bucket_path: "DockerProdFlow"
+  on:
+    branch: master
+  access_key_id: $access_key_id
+  secret_access_key:
+    secure: "$secret_access_key"    
     
 
